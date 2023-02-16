@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-import javax.crypto.spec.RC2ParameterSpec;
 
 import java.util.Random;
 
@@ -12,11 +11,13 @@ class Conversation {
 
 
     public static void main(String[] arguments) {
-
+/**An array list to save the questions and the answers to print the transcript*/
         ArrayList<String> transcript = new ArrayList<String>();
+        /**taking input from the user*/
         Scanner userInput = new Scanner(System.in);
         System.out.println("How many rounds?");
         int numRounds = userInput.nextInt();
+
         transcript.add("How many rounds?");
         transcript.add(Integer.toString(numRounds));
         transcript.add("welcome!what's up?");
@@ -36,19 +37,23 @@ class Conversation {
 
         String[] toMirror = {
             "I",
+            "I'm",
             "me",
             "am",
             "are",
+            "my",
             "you"
         };
         String[] replacement = {
             "you",
+            "you're",
             "you",
             "are",
             "am",
-            "I"
+            "your",
+            "me"
         };
-        // ArrayList<String> transcript = new ArrayList<String>();
+       
        
 
 
@@ -67,37 +72,40 @@ class Conversation {
               currentWord="";
 
                 for (int j = 0; j < toMirror.length; j++) {
-                  //checking to see if we need to mirror the current word
+                  /**checking to see if we need to mirror the current word*/
                     if (words[i].equals(toMirror[j])) {
                         counter++;
                         currentWord= replacement[j];
                     }
 
                 }
-                //if we did not mirror grab the original
+                /**if we did not mirror grab the original*/
                 if (currentWord.equals("")) {
                   r2 += words[i] + " ";
                   
 
                 }
-                //if we did mirorr add the replacment word to the sentence
+                /**if we did mirorr add the replacment word to the sentence*/
                 else{ r2 += currentWord+ " ";}
                 
                
 
 
             }
-            //if we mirrored print the new sentence with the replacement
+            /**if we mirrored print the new sentence with the replacement*/
             if (counter > 0) {
               System.out.println(r2);
+              transcript.add(thoughts);
               transcript.add(r2);
+
             
             }
-            //if we did not mirror answer with a random response
+            /**if we did not mirror answer with a random response*/
             else {
                String  computerResponse=(randomResponses[r.nextInt(randomResponses.length)]);
                 System.out.println(computerResponse);
-                transcript.add(r2);
+                // transcript.add(r2);
+                 transcript.add(thoughts);
                 transcript.add(computerResponse);
             }   
 
@@ -110,7 +118,7 @@ class Conversation {
        
       
 
-       
+       /**print the transcript*/
         for( String word : transcript){
             System.out.println(word);
         } 
